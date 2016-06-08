@@ -31,11 +31,11 @@ class AirtablePlus
     @records ||= @table.all
   end
   
-  def repo_list
+  def list
     records.map(&:repo)
   end
   
-  def all_repos
+  def all
     records.map {|record| @mapper.mapping(record)}
   end
   
