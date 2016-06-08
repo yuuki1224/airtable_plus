@@ -2,6 +2,10 @@
 
 You can use your Airtable more easily from your script!
 
+Features
+
+- Mapping
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,6 +25,18 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+class Model::Repository
+  attr_accessor :name, :url, :created_at
+end
+
+ATTR_TABLE = {
+  'Repo Name': 'name',
+  'URL': 'url',
+  'Created At': {name: 'created_at', proc: Proc.new {|v| DateTime.strptime(v, "%m/%d/%Y %H:%M:%S")}},
+}
+
+IGNORE_ATTRS = ['avatar_url']
+
 @airtable_plus = AirtablePlus.new(ENV['API_KEY'], APP_ID, WORKSHEET_NAME)
 
 @airtable_plus.klass = Model::Repository
@@ -29,6 +45,11 @@ Or install it yourself as:
 
 @airtable_plus.all # => [Model::Repository]
 ```
+
+## Why not google spreadsheet?
+
+We used to use google spreadsheet to manage our data. Then, the script, which was running on Heroku free dyno has updated that spreadsheet every morning. But we've gotta problem at some point. It is really easily exceeded the memory limitation of heroku. Our gSheet was too large to handle from script on free dyno! At the time, our record size was roughly over 6000 rows. When we load that sheet with [google-drive-ruby](https://github.com/gimite/google-drive-ruby), memory usage was over 1 GB so Heroku dyno usually kill that process of running script.
+So we've decided to move to alternative tool, `AirTable`. So I hope this kind of stuff not gonna happen again on AirTable as well.
 
 ## Development
 
