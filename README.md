@@ -2,11 +2,13 @@
 
 You can use your Airtable more easily from your script!
 
+<img src="https://github.com/yuuki1224/airtable_plus/raw/master/images/overview.png" width="300" alert="overview">
+
 ### Features
 
 - Mapping to custom object
 - Converting to `Airtable::Record`
-- Airtableable
+- Module `AirTablePlus::Airtableable`
 
 ## Installation
 
