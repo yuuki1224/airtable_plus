@@ -2,9 +2,11 @@
 
 You can use your Airtable more easily from your script!
 
-Features
+### Features
 
-- Mapping
+- Mapping to custom object
+- Converting to `Airtable::Record`
+- Airtableable
 
 ## Installation
 
@@ -30,8 +32,8 @@ class Model::Repository
 end
 
 ATTR_TABLE = {
-  'Repo Name': 'name',
-  'URL': 'url',
+  'Repo Name':  'name',
+  'URL':        'url',
   'Created At': {name: 'created_at', proc: Proc.new {|v| DateTime.strptime(v, "%m/%d/%Y %H:%M:%S")}},
 }
 
@@ -56,14 +58,13 @@ repo.to_record # => Airtable::Record
 
 ```ruby
 class Model::Repository
-  include AirtablePlus::Airtableable
-  
+  include AirtablePlus::Airtableable  
   attr_accessor :name, :url, :created_at
 end
 
-repo = Repository.new
-repo.name = 'yuuki1224/airtable_plus'
-repo.url = 'https://github.com/yuuki1224/airtable_plus'
+repo            = Repository.new
+repo.name       = 'yuuki1224/airtable_plus'
+repo.url        = 'https://github.com/yuuki1224/airtable_plus'
 repo.created_at = DateTime.now
 
 # This instance would be saved into Airtable.
