@@ -44,6 +44,30 @@ IGNORE_ATTRS = ['avatar_url']
 @airtable_plus.ignore_attrs = IGNORE_ATTRS
 
 @airtable_plus.all # => [Model::Repository]
+
+repo = @airtable_plus.first
+repo.to_record # => Airtable::Record
+
+@airtable_plus.has?(repo) # => true or false
+@airtable_plus.add(repo)
+@airtable_plus.delete(repo)
+@airtable_plus.update(repo)
+```
+
+```ruby
+class Model::Repository
+  include AirtablePlus::Airtableable
+  
+  attr_accessor :name, :url, :created_at
+end
+
+repo = Repository.new
+repo.name = 'yuuki1224/airtable_plus'
+repo.url = 'https://github.com/yuuki1224/airtable_plus'
+repo.created_at = DateTime.now
+
+# This instance would be saved into Airtable.
+repo.save!
 ```
 
 ## Why not google spreadsheet?

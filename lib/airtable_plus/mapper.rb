@@ -10,6 +10,8 @@ class AirtablePlus
     
     # AirTable::Record class
     def mapping(record)
+      raise "Please set @klass instance" if @klass.nil?
+      
       @klass.new.tap do |instance|
         record.fields.each do |key, value|
           next if @ignore_attrs.include?(key)
@@ -25,7 +27,7 @@ class AirtablePlus
           begin
             instance.send("#{attr_name}=", value)
           rescue NoMethodError => e
-            puts "#{key} doesn't define in @attr_table."
+            puts "#{key} isn't defined in @attr_table."
             exit 1
           rescue Exception => e
             # binding.pry
