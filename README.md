@@ -39,9 +39,9 @@ IGNORE_ATTRS = ['avatar_url']
 
 @airtable_plus = AirtablePlus.new(ENV['API_KEY'], APP_ID, WORKSHEET_NAME)
 
-@airtable_plus.klass = Model::Repository
-@airtable_plus       = ATTR_TABLE
-@airtable_plus       = IGNORE_ATTRS
+@airtable_plus.klass        = Model::Repository
+@airtable_plus.attr_table   = ATTR_TABLE
+@airtable_plus.ignore_attrs = IGNORE_ATTRS
 
 @airtable_plus.all # => [Model::Repository]
 ```
