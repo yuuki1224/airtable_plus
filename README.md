@@ -12,6 +12,8 @@ You can use your Airtable more easily from your script!
 
 ## Installation
 
+**Note:** I haven't pushed this gem to `rubygems.org` yet. So you couldn't install this gem currently.
+
 Add this line to your application's Gemfile:
 
 ```ruby
